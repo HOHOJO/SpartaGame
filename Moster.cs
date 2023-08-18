@@ -1,0 +1,7 @@
+class Moster
+{
+    public Moster()
+    {
+
+    }
+}

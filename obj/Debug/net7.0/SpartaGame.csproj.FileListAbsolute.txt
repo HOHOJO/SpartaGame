@@ -1,0 +1,14 @@
+C:\Users\USER\Desktop\스파르타\C#기초\SpartaGame\bin\Debug\net7.0\SpartaGame.exe
+C:\Users\USER\Desktop\스파르타\C#기초\SpartaGame\bin\Debug\net7.0\SpartaGame.deps.json
+C:\Users\USER\Desktop\스파르타\C#기초\SpartaGame\bin\Debug\net7.0\SpartaGame.runtimeconfig.json
+C:\Users\USER\Desktop\스파르타\C#기초\SpartaGame\bin\Debug\net7.0\SpartaGame.dll
+C:\Users\USER\Desktop\스파르타\C#기초\SpartaGame\bin\Debug\net7.0\SpartaGame.pdb
+C:\Users\USER\Desktop\스파르타\C#기초\SpartaGame\obj\Debug\net7.0\SpartaGame.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\Desktop\스파르타\C#기초\SpartaGame\obj\Debug\net7.0\SpartaGame.AssemblyInfoInputs.cache
+C:\Users\USER\Desktop\스파르타\C#기초\SpartaGame\obj\Debug\net7.0\SpartaGame.AssemblyInfo.cs
+C:\Users\USER\Desktop\스파르타\C#기초\SpartaGame\obj\Debug\net7.0\SpartaGame.csproj.CoreCompileInputs.cache
+C:\Users\USER\Desktop\스파르타\C#기초\SpartaGame\obj\Debug\net7.0\SpartaGame.dll
+C:\Users\USER\Desktop\스파르타\C#기초\SpartaGame\obj\Debug\net7.0\refint\SpartaGame.dll
+C:\Users\USER\Desktop\스파르타\C#기초\SpartaGame\obj\Debug\net7.0\SpartaGame.pdb
+C:\Users\USER\Desktop\스파르타\C#기초\SpartaGame\obj\Debug\net7.0\SpartaGame.genruntimeconfig.cache
+C:\Users\USER\Desktop\스파르타\C#기초\SpartaGame\obj\Debug\net7.0\ref\SpartaGame.dll
