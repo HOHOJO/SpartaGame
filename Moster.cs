@@ -1,4 +1,4 @@
-class Moster
+public class Moster
 {
     public Moster()
     {

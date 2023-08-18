@@ -18,7 +18,6 @@
         }
 
         public void GameStart(){
-            bool i = true;
             string Command = Console.ReadLine();
                 switch (Command)
                 {

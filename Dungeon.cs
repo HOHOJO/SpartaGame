@@ -1,4 +1,4 @@
-class Dungeon
+public class Dungeon
 {
     public Dungeon()
     {

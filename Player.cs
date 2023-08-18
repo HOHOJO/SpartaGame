@@ -1,5 +1,5 @@
 
-class Player : Character
+public class Player : Character
 {
     public string Name { get; set; }
     public int Health { get; set;}

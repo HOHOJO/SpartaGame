@@ -1,19 +1,22 @@
-using System.Security.Permissions;
-
 namespace SprtaGame
 {
-    class ItemCode
+    public class ItemCode
     {
-        string name="";
-        int damage=0;
-        int defense=0;
-        int health=0;
-        int gold=0;
-        string info="";
+       public string name="";
+       public int damage=0;
+       public int defense=0;
+       public int health=0;
+       public int gold=0;
+       public string info="";
         bool get = false;
 
         public ItemCode(string name, int damage, int defense, int health, int gold, string info){
-
+            this.name = name;
+            this.damage = damage;
+            this.defense = defense;
+            this.health = health;
+            this.gold = gold;
+            this.info = info;
         }
     }
 }
