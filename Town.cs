@@ -106,7 +106,6 @@ public class Town
         }
 
         var items = from pair in N_sort orderby pair.Value ascending select pair;
-        foreach(KeyValuePair<int, string> pair in items)
 
         num =0;
         foreach(KeyValuePair<int, string> pair in items)

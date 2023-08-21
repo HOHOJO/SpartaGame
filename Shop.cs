@@ -28,8 +28,9 @@ public class Shop
             Console.WriteLine("#############################상점############################");
             Console.WriteLine("#############################################################");
             Console.WriteLine("1. 물품보기");
-            Console.WriteLine("2. 인벤토리");
-            Console.WriteLine("3. 뒤로가기");
+            Console.WriteLine("2. 판매하기");
+            Console.WriteLine("3. 인벤토리");
+            Console.WriteLine("4. 뒤로가기");
             Command = Console.ReadLine();
 
             switch (Command)
@@ -38,17 +39,25 @@ public class Shop
                         Console.WriteLine("물품을 봅니다.");
                         ShowShop();
                         break;
-
                     case "2" :
-                        this.myInven();     
+                        shopSell();  
                         break;
 
                     case "3" :
+                        this.myInven();     
+                        break;
+
+                    case "4" :
                         town = new Town(player);
                         town.inTown();
                         break;
                 } 
 
+    }
+
+    public void shopSell()
+    {
+        
     }
 
     public void ShowShop()
