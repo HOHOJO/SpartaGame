@@ -1,10 +1,16 @@
 namespace SprtaGame
 {
     public class Item : ItemCode{
-        string name = "";
-        string info ="";
 
         public Dictionary<int, ItemCode> itemMap = new Dictionary<int, ItemCode>();
+        
+       public string name="";
+       public int damage=0;
+       public int defense=0;
+       public int health=0;
+       public int gold=0;
+       public string info="";
+       public bool get = false;
 
         public Item(string name, int damage, int defense, int health, int gold, string info) : base(name, damage, defense, health, gold, info)
         {

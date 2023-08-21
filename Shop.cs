@@ -55,7 +55,7 @@ public class Shop
         int num =1; 
         ItemCode itemCode;
         Console.WriteLine("이름                                        공격력  방어력  능력치  가격          설명");
-                    Console.WriteLine("#############################################################");
+        Console.WriteLine("#############################################################");
         foreach( var pair in poket)
         {
             
@@ -84,15 +84,18 @@ public class Shop
             }
         }
             Console.WriteLine("0 뒤로가기");
+
             Command = Console.ReadLine();
-            int number = Int32.Parse(Command);
-            if(number !=0)
+            int number = Int32.Parse(Command)-1;
+            if(number+1 !=0)
             {
                 itemCode = item.itemMap[poket[number]];
                 if(player.gold>=itemCode.gold&&poket[number]!=0)
                 {
                     poket[number] -= 1;
+                    player.getItem(number, 1);
                     Console.WriteLine("구매완료");
+                    player.gold-=itemCode.gold;
                     inShop(player);
                 }
                 else
@@ -100,6 +103,11 @@ public class Shop
                     Console.WriteLine("구매불가");
                     inShop(player);
                 }
+            }
+            else
+            {
+                town = new Town(player);
+                town.inTown();
             }
     }
 

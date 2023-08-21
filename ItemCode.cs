@@ -8,7 +8,7 @@ namespace SprtaGame
        public int health=0;
        public int gold=0;
        public string info="";
-        bool get = false;
+       public bool get = false;
 
         public ItemCode(string name, int damage, int defense, int health, int gold, string info){
             this.name = name;
@@ -17,6 +17,7 @@ namespace SprtaGame
             this.health = health;
             this.gold = gold;
             this.info = info;
+            this.get = false;
         }
     }
 }
