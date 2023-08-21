@@ -39,11 +39,11 @@ public class Shop
                         break;
 
                     case "2" :
-
+                        this.myInven();     
                         break;
 
                     case "3" :
-                        Town town = new Town(player);
+                        town = new Town(player);
                         town.inTown();
                         break;
                 } 
@@ -89,7 +89,8 @@ public class Shop
             int number = Int32.Parse(Command)-1;
             if(number+1 !=0)
             {
-                itemCode = item.itemMap[poket[number]];
+                itemCode = item.itemMap[number];
+                Console.WriteLine(itemCode.name +"" );
                 if(player.gold>=itemCode.gold&&poket[number]!=0)
                 {
                     poket[number] -= 1;
@@ -111,9 +112,70 @@ public class Shop
             }
     }
 
-    public void myinven()
+public void myInven()
     {
+        string E ="";
+        int [] key = new int[20];
+        int num = 0;
+        List<int> invenkey = player.getInvenKey();
+        int[] invenvalue = player.getInvenValue();
+        ItemCode itemCode;
 
+        Console.WriteLine("#############################################################");
+        Console.WriteLine("############################인벤토리###########################");
+        Console.WriteLine("\n");
+        foreach(int i in invenkey)
+        {
+            key[num] = i;
+            itemCode = player.inventory.item.itemMap[i];
+            if(itemCode.get)
+            {
+                E+="[E]";
+            }
+            Console.WriteLine(num+". "+itemCode.name +E+"  ||공격력  "+itemCode.damage+"  ||방어력  "+itemCode.defense+"  ||능력  "+itemCode.health+"  ||수량  "+invenvalue[num]+"  ||설명  "+itemCode.info+"  ||  ");
+            num ++;
+        }
+        Console.WriteLine("a. 장착관리");
+        Console.WriteLine("b. 뒤로가기");
+        Command = Console.ReadLine();
+        switch (Command)
+                {
+                    case "a" :
+                    int number;
+                    Console.WriteLine("장착 관리하기");
+                    Command = Console.ReadLine();
+                    number = Int32.Parse(Command);
+                    itemCode = item.itemMap[key[number]];
+                    Console.WriteLine(""+itemCode.name);
+
+                    if(key[key[number]]<=invenkey.Count&&itemCode.health==0)
+                    {
+                        if(player.mountItem(key[number])==0)
+                        {
+                            Console.WriteLine(""+player.inventory.item.itemMap[key[number]].get);
+                             Console.WriteLine("장착 해제");
+                             myInven();
+                        }
+                        else
+                        {
+                            Console.WriteLine(""+player.inventory.item.itemMap[key[number]].get);
+                             Console.WriteLine("장착 완료");
+                             myInven();
+                        }
+
+                    }
+                    else
+                    {
+                            Console.WriteLine("장착불가");
+                             myInven();
+                    }
+                    myInven();
+                    break;
+
+                    case "b" :
+                    inShop(player);
+                    break;
+                }
     }
 
     
