@@ -95,7 +95,7 @@ public class Town
 
         Console.WriteLine("#############################################################");
         Console.WriteLine("############################인벤토리###########################");
-        Console.WriteLine("\n");
+        Console.WriteLine($"{"번호",-5}|{"이름",-30}|{"공격력",10}|{"방어력",10}|{"능력",10}|{"수량",5}|{"설명",-60}");
         foreach(int i in invenkey)
         {
             key[num] = i;
@@ -104,11 +104,12 @@ public class Town
             {
                 E+="[E]";
             }
-            Console.WriteLine(num+". "+itemCode.name +E+"  ||공격력  "+itemCode.damage+"  ||방어력  "+itemCode.defense+"  ||능력  "+itemCode.health+"  ||수량  "+invenvalue[num]+"  ||설명  "+itemCode.info+"  ||  ");
+            Console.WriteLine("{0,-5}|{1,-30}|{2,5}|{3,5}|{4,5}|{5,5}||{6,-60}", num, itemCode.name, itemCode.damage, itemCode.defense, itemCode.health, invenvalue[num], itemCode.info);
             num ++;
         }
         Console.WriteLine("a. 장착관리");
-        Console.WriteLine("b. 뒤로가기");
+        Console.WriteLine("b. 정렬하기");
+        Console.WriteLine("c. 뒤로가기");
         Command = Console.ReadLine();
         switch (Command)
                 {
@@ -118,23 +119,15 @@ public class Town
                     Command = Console.ReadLine();
                     number = Int32.Parse(Command);
                     itemCode = item.itemMap[key[number]];
+
                     Console.WriteLine(""+itemCode.name);
 
                     if(key[key[number]]<=invenkey.Count&&itemCode.health==0)
                     {
-                        if(player.mountItem(key[number])==0)
-                        {
-                            Console.WriteLine(""+player.inventory.item.itemMap[key[number]].get);
-                             Console.WriteLine("장착 해제");
-                             myInven();
-                        }
-                        else
-                        {
-                            Console.WriteLine(""+player.inventory.item.itemMap[key[number]].get);
-                             Console.WriteLine("장착 완료");
-                             myInven();
-                        }
-
+                        player.mountItem(key[number]);
+                        Console.WriteLine(""+player.inventory.item.itemMap[key[number]].get);
+                        Console.WriteLine("장착 완료");
+                        myInven();
                     }
                     else
                     {
@@ -145,6 +138,10 @@ public class Town
                     break;
 
                     case "b" :
+;
+                    break;
+
+                    case "c" :
                     inTown();
                     break;
                 }

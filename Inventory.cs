@@ -4,6 +4,12 @@ public class Inventory
 {
     public Item item = new Item("",0,0,0,0,"");
     Dictionary<int, int> poket = new Dictionary<int, int>();
+
+    bool weapon=false;
+    int weaponCode;
+    bool armor=false;
+    int armorCode;
+
     public Inventory(){
         poket.Add(0,10);
         poket.Add(1,3);
@@ -54,18 +60,42 @@ public class Inventory
         }
     }
 
-    public int mountitem(int code)
+    public void mountitem(int code)
     {   
         
-        if(item.itemMap[code].get)
+        if(weapon||armor)
         {
+            if(item.itemMap[code].damage>=0)
+            {
+                item.itemMap[weaponCode].get = false;
+                item.itemMap[code].get = true;
+                weaponCode = code;
+                weapon = true;
+            }
+            else
+            {
+                item.itemMap[armorCode].get = false;
+                item.itemMap[code].get = true;
+                armorCode = code;
+                armor = true;
+            }
             item.itemMap[code].get = false;
-            return 0;    
+   
         }
         else
         {
-            item.itemMap[code].get = true;
-            return 1;
+            if(item.itemMap[code].damage>=0)
+            {
+                item.itemMap[code].get = true;
+                weaponCode = code;
+                weapon = true;
+            }
+            else
+            {
+                item.itemMap[code].get = true;
+                armorCode = code;
+                armor = true;
+            }
         }
 
     }

@@ -47,9 +47,9 @@ public class Player : Character
         return inventory.useItem(code);
     }
 
-    public int mountItem(int code)// 장비 장착
+    public void mountItem(int code)// 장비 장착
     {
-        return inventory.mountitem(code);
+        inventory.mountitem(code);
     }
 
     public string getState() // 상태 정보 전달

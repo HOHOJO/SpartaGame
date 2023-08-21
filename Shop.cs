@@ -1,5 +1,6 @@
 using System.ComponentModel.Design;
 using System.Diagnostics.Contracts;
+using System.Text;
 using SprtaGame;
 public class Shop
 {
@@ -52,36 +53,20 @@ public class Shop
 
     public void ShowShop()
     {
-        int num =1; 
+        int num =1;
+        char spad = ' ';
         ItemCode itemCode;
-        Console.WriteLine("이름                                        공격력  방어력  능력치  가격          설명");
-        Console.WriteLine("#############################################################");
+        Console.WriteLine($"{"번호",-5}|{"이름",-30}|{"공격력",5}|{"방어력",5}|{"능력",5}|{"가격",5}|{"수량",5}|{"설명",-60}");
         foreach( var pair in poket)
         {
-            
-            if(pair.Value !=0)
-            {
-                
-                itemCode = item.itemMap[pair.Key];
-                if(itemCode.name.Length<20)
-                {
-                    int input = 20-itemCode.name.Length;
-                    string s1 = " ";
-                    for(int i=1; i < input ; i++){s1+="- ";}
-                Console.WriteLine(num+". "+itemCode.name +s1+"##   "+itemCode.damage+"   ##  "+itemCode.defense+"   ##   "+itemCode.health+"  ##  가격  "+itemCode.gold+"  ##   "+itemCode.info);
-                num++;
-                }
-                else
-                {
-                Console.WriteLine(num+". "+itemCode.name +"##  "+itemCode.damage+"  ##  "+itemCode.defense+"  ##  "+itemCode.health+"  ##  가격  "+itemCode.gold+"  ##  "+itemCode.info);
-                num++;
-                }
-            }
-            else
-            {
-                itemCode = item.itemMap[pair.Key];
-                Console.WriteLine(itemCode.name +"############################################################" );
-            }
+           itemCode = item.itemMap[pair.Key];
+           int padlen = 50 - Encoding.Default.GetBytes(itemCode.name).Length;
+           //Console.WriteLine(num+". "+itemCode.name +"##   "+itemCode.damage+"   ##  "+itemCode.defense+"   ##   "+itemCode.health+"  ##  가격  "+itemCode.gold+"  ##   "+poket[num-1]+"  ##   "+itemCode.info);
+           Console.WriteLine("{0,-5}|{1,-30}|{2,5}|{3,5}|{4,5}|{5,5}|{6,5}|{7,-60}", num, itemCode.name, itemCode.damage, itemCode.defense, itemCode.health, itemCode.gold, poket[num-1], itemCode.info);
+           //Console.WriteLine($"{num,-5}|{itemCode.name,-25}|{itemCode.damage,10}|{itemCode.defense,10}|{itemCode.health,10}|{itemCode.gold,10}|{poket[num-1],10}|{itemCode.info,5}");
+           //Console.WriteLine(num.ToString().PadRight(5,spad)+"|"+itemCode.name.PadRight(30,spad)+""+itemCode.damage.ToString().PadRight(10,spad)+""+itemCode.defense.ToString().PadRight(10,spad));
+            //Console.WriteLine("{0} | {1}", num,"".PadRight(padlen)+ itemCode.name);
+           num++;
         }
             Console.WriteLine("0 뒤로가기");
 
@@ -91,7 +76,7 @@ public class Shop
             {
                 itemCode = item.itemMap[number];
                 Console.WriteLine(itemCode.name +"" );
-                if(player.gold>=itemCode.gold&&poket[number]!=0)
+                if(player.gold>=itemCode.gold && poket[number]!=0)
                 {
                     poket[number] -= 1;
                     player.getItem(number, 1);
@@ -123,7 +108,7 @@ public void myInven()
 
         Console.WriteLine("#############################################################");
         Console.WriteLine("############################인벤토리###########################");
-        Console.WriteLine("\n");
+        Console.WriteLine($"{"번호",-5}|{"이름",-30}|{"공격력",10}|{"방어력",10}|{"능력",10}|{"수량",5}|{"설명",-60}");
         foreach(int i in invenkey)
         {
             key[num] = i;
@@ -132,11 +117,12 @@ public void myInven()
             {
                 E+="[E]";
             }
-            Console.WriteLine(num+". "+itemCode.name +E+"  ||공격력  "+itemCode.damage+"  ||방어력  "+itemCode.defense+"  ||능력  "+itemCode.health+"  ||수량  "+invenvalue[num]+"  ||설명  "+itemCode.info+"  ||  ");
+            Console.WriteLine("{0,-5}|{1,-30}|{2,5}|{3,5}|{4,5}|{5,5}||{6,-60}", num, itemCode.name, itemCode.damage, itemCode.defense, itemCode.health, invenvalue[num], itemCode.info);
             num ++;
         }
         Console.WriteLine("a. 장착관리");
-        Console.WriteLine("b. 뒤로가기");
+        Console.WriteLine("b. 정렬하기");
+        Console.WriteLine("c. 뒤로가기");
         Command = Console.ReadLine();
         switch (Command)
                 {
@@ -150,19 +136,10 @@ public void myInven()
 
                     if(key[key[number]]<=invenkey.Count&&itemCode.health==0)
                     {
-                        if(player.mountItem(key[number])==0)
-                        {
-                            Console.WriteLine(""+player.inventory.item.itemMap[key[number]].get);
-                             Console.WriteLine("장착 해제");
-                             myInven();
-                        }
-                        else
-                        {
-                            Console.WriteLine(""+player.inventory.item.itemMap[key[number]].get);
-                             Console.WriteLine("장착 완료");
-                             myInven();
-                        }
-
+                        player.mountItem(key[number]);
+                        Console.WriteLine(""+player.inventory.item.itemMap[key[number]].get);
+                        Console.WriteLine("장착 완료");
+                        myInven();
                     }
                     else
                     {
@@ -173,6 +150,10 @@ public void myInven()
                     break;
 
                     case "b" :
+
+                    break;
+
+                    case "c" :
                     inShop(player);
                     break;
                 }
