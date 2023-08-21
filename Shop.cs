@@ -92,15 +92,15 @@ public class Shop
             }
             else
             {
-                town = new Town(player);
-                town.inTown();
+                inShop(player);
             }
     }
 
 public void myInven()
     {
-        string E ="";
+         string E ="";
         int [] key = new int[20];
+        Dictionary<int, string> N_sort = new Dictionary<int, string>();
         int num = 0;
         List<int> invenkey = player.getInvenKey();
         int[] invenvalue = player.getInvenValue();
@@ -109,10 +109,22 @@ public void myInven()
         Console.WriteLine("#############################################################");
         Console.WriteLine("############################인벤토리###########################");
         Console.WriteLine($"{"번호",-5}|{"이름",-30}|{"공격력",10}|{"방어력",10}|{"능력",10}|{"수량",5}|{"설명",-60}");
-        foreach(int i in invenkey)
+        foreach(int i in invenkey) // 인벤토리 정렬
         {
             key[num] = i;
             itemCode = player.inventory.item.itemMap[i];
+            N_sort.Add(i,itemCode.name);
+            num ++;
+        }
+
+        var items = from pair in N_sort orderby pair.Value ascending select pair;
+        foreach(KeyValuePair<int, string> pair in items)
+
+        num =0;
+        foreach(KeyValuePair<int, string> pair in items)
+        {
+
+            itemCode = player.inventory.item.itemMap[pair.Key];
             if(itemCode.get)
             {
                 E+="[E]";
@@ -120,6 +132,7 @@ public void myInven()
             Console.WriteLine("{0,-5}|{1,-30}|{2,5}|{3,5}|{4,5}|{5,5}||{6,-60}", num, itemCode.name, itemCode.damage, itemCode.defense, itemCode.health, invenvalue[num], itemCode.info);
             num ++;
         }
+
         Console.WriteLine("a. 장착관리");
         Console.WriteLine("b. 정렬하기");
         Console.WriteLine("c. 뒤로가기");
@@ -128,10 +141,11 @@ public void myInven()
                 {
                     case "a" :
                     int number;
-                    Console.WriteLine("장착 관리하기");
+                    Console.WriteLine("장착 관리하기(장착할 아이템 선택)");
                     Command = Console.ReadLine();
                     number = Int32.Parse(Command);
                     itemCode = item.itemMap[key[number]];
+
                     Console.WriteLine(""+itemCode.name);
 
                     if(key[key[number]]<=invenkey.Count&&itemCode.health==0)
@@ -150,7 +164,7 @@ public void myInven()
                     break;
 
                     case "b" :
-
+;
                     break;
 
                     case "c" :
