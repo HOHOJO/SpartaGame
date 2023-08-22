@@ -59,7 +59,7 @@ public class Town
 
         public void GoDungeon()
     {
-        shop.inShop(this.player);
+        dungeon.inDungeon(this.player);
     }
 
     public void myState(string state)
@@ -86,7 +86,7 @@ public class Town
 
     public void myInven()
     {
-        string E ="";
+         string E ="";
         int [] key = new int[20];
         Dictionary<int, string> N_sort = new Dictionary<int, string>();
         int num = 0;
@@ -106,6 +106,7 @@ public class Town
         }
 
         var items = from pair in N_sort orderby pair.Value ascending select pair;
+        foreach(KeyValuePair<int, string> pair in items)
 
         num =0;
         foreach(KeyValuePair<int, string> pair in items)
@@ -121,8 +122,9 @@ public class Town
         }
 
         Console.WriteLine("a. 장착관리");
-        Console.WriteLine("b. 정렬하기");
-        Console.WriteLine("c. 뒤로가기");
+        Console.WriteLine("b. 아이템사용");
+        Console.WriteLine("c. 정렬하기");
+        Console.WriteLine("d. 뒤로가기");
         Command = Console.ReadLine();
         switch (Command)
                 {
@@ -151,10 +153,44 @@ public class Town
                     break;
 
                     case "b" :
-;
+                    Console.WriteLine("사용할 아이템 선택");
+                    Command = Console.ReadLine();
+                    number = Int32.Parse(Command);
+                    itemCode = item.itemMap[key[number]];
+
+                    if(itemCode.health!=0&&player.inventory.poket[key[number]]>0)
+                    {
+                        switch(itemCode.name)
+                        {
+                            case "회복물약":
+                            player.Health+=itemCode.health;
+                            if(player.Health>200)
+                            {
+                                player.Health = 200;
+                            }
+                            Console.WriteLine("회복 아이템 사용 완료");
+                            player.useItem(key[number]);
+                            break;
+
+                            case "힘물약":
+                            player.Damage+=itemCode.health;
+                            Console.WriteLine("힘 아이템 사용 완료");
+                            player.useItem(key[number]);
+                            break;
+                        }
+                    }
+                    else
+                    {
+                             Console.WriteLine("사용불가");
+                             myInven();
+                    }
                     break;
 
                     case "c" :
+
+                    break;
+
+                    case "d" :
                     inTown();
                     break;
                 }

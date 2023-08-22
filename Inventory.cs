@@ -3,7 +3,7 @@ using SprtaGame;
 public class Inventory
 {
     public Item item = new Item("",0,0,0,0,"");
-    Dictionary<int, int> poket = new Dictionary<int, int>();
+    public Dictionary<int, int> poket = new Dictionary<int, int>();
 
     bool weapon=false;
     int weaponCode;
@@ -47,17 +47,9 @@ public class Inventory
         return value;
     }
 
-    public int useItem(int code)
+    public void useItem(int code)
     {
-        if(poket[code]>=1)
-        {
             poket[code]-=1;
-            return 1;
-        }
-        else
-        {
-            return 0;
-        }
     }
 
     public void mountitem(int code)

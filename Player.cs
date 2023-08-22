@@ -42,9 +42,9 @@ public class Player : Character
         inventory.getitem(code, num);
     }
 
-    public int useItem(int code) // 아이템 사용
+    public void useItem(int code) // 아이템 사용
     {
-        return inventory.useItem(code);
+        inventory.useItem(code);
     }
 
     public void mountItem(int code)// 장비 장착

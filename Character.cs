@@ -1,6 +1,6 @@
 public interface Character
 {
-    String Name { get; set; }
+    string Name { get; set; }
     int Health { get; set; }
     int Damage { get; set; }
     int Defense { get; set; }

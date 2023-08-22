@@ -105,7 +105,7 @@ public class Shop
             }
     }
 
-public void myInven()
+    public void myInven()
     {
          string E ="";
         int [] key = new int[20];
@@ -143,8 +143,9 @@ public void myInven()
         }
 
         Console.WriteLine("a. 장착관리");
-        Console.WriteLine("b. 정렬하기");
-        Console.WriteLine("c. 뒤로가기");
+        Console.WriteLine("b. 아이템사용");
+        Console.WriteLine("c. 정렬하기");
+        Console.WriteLine("d. 뒤로가기");
         Command = Console.ReadLine();
         switch (Command)
                 {
@@ -173,14 +174,46 @@ public void myInven()
                     break;
 
                     case "b" :
-;
+                    Console.WriteLine("사용할 아이템 선택");
+                    Command = Console.ReadLine();
+                    number = Int32.Parse(Command);
+                    itemCode = item.itemMap[key[number]];
+
+                    if(itemCode.health!=0&&player.inventory.poket[key[number]]>0)
+                    {
+                        switch(itemCode.name)
+                        {
+                            case "회복물약":
+                            player.Health+=itemCode.health;
+                            if(player.Health>200)
+                            {
+                                player.Health = 200;
+                            }
+                            Console.WriteLine("회복 아이템 사용 완료");
+                            player.useItem(key[number]);
+                            break;
+
+                            case "힘물약":
+                            player.Damage+=itemCode.health;
+                            Console.WriteLine("힘 아이템 사용 완료");
+                            player.useItem(key[number]);
+                            break;
+                        }
+                    }
+                    else
+                    {
+                             Console.WriteLine("사용불가");
+                             myInven();
+                    }
                     break;
 
                     case "c" :
+
+                    break;
+
+                    case "d" :
                     inShop(player);
                     break;
                 }
     }
-
-    
 }

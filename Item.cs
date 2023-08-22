@@ -24,7 +24,7 @@ namespace SprtaGame
             info = "평범한 회복물약, 체력을 50 회복시킨다.";
             itemMap.Add(0, new ItemCode(name, 0, 0, 50, 50,info ));
 
-            name = "힘 물약";
+            name = "힘물약";
             info = "힘을 10올린다.(던전에서 나오면 초기화)";
             itemMap.Add(1, new ItemCode(name, 0, 0, 10, 100,info ));
 
