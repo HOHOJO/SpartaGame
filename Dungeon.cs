@@ -48,6 +48,7 @@ public class Dungeon
             Console.WriteLine("1. 1 스테이지");
             Console.WriteLine("2. 2 스테이지");
             Console.WriteLine("3. 3 스테이지");
+            Console.WriteLine("4. 휴식하기");
             Console.WriteLine("4. 뒤로가기");
             Command = Console.ReadLine();
 
@@ -63,6 +64,42 @@ public class Dungeon
                         dungeonStage(15);
                         break;
                     case "4" :
+                        restDungeon();
+                        break;
+                    case "5" :
+                        inDungeon(player);
+                        break;
+                } 
+    }
+
+    public void restDungeon()
+    {
+            Console.WriteLine("#############################################################");
+            Console.WriteLine("###############200G 지불시 휴식이 가능합니다#################");
+            Console.WriteLine("#############################################################");
+            Console.WriteLine("1. 휴식하기");
+            Console.WriteLine("2. 뒤로가기");
+            Command = Console.ReadLine();
+
+            switch (Command)
+                {
+                    case "1" :
+                        if(player.gold>=200)
+                        {
+                            Console.WriteLine("휴식중.....");
+                            Thread.Sleep(3000);
+                            player.gold-=200;
+                            player.Health=200;
+                            Console.WriteLine("휴식완료!");
+                            restDungeon();
+                        }
+                        else
+                        {
+                            Console.WriteLine("돈이없다");
+                            restDungeon();
+                        }
+                        break;
+                    case "2" :
                         inDungeon(player);
                         break;
                 } 
