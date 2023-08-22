@@ -28,19 +28,19 @@ namespace SprtaGame
             info = "힘을 10올린다.(던전에서 나오면 초기화)";
             itemMap.Add(1, new ItemCode(name, 0, 0, 10, 100,info ));
 
-            name = "낡은 검";
+            name = "낡은검";
             info = "낡은 검 금방 부러질것 같다.";
             itemMap.Add(2, new ItemCode(name, 10, 0, 0, 200,info ));
 
-            name = "낡은 방패";
+            name = "낡은방패";
             info = "막기 성능이 의심되는 방패";
             itemMap.Add(3, new ItemCode(name, 0, 10, 0, 100,info ));
 
-            name = "좋은 검";
+            name = "아주좋은검";
             info = "검 좋다!";
             itemMap.Add(4, new ItemCode(name, 30, 0, 0, 1000,info ));
             
-            name = "좋은 방패";
+            name = "아마도좋은방패";
             info = "좋다! 방패!";
             itemMap.Add(5, new ItemCode(name, 0, 30, 0, 1000,info ));
 

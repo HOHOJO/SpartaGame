@@ -107,38 +107,42 @@ public class Shop
 
     public void myInven()
     {
-         string E ="";
-        int [] key = new int[20];
-        Dictionary<int, string> N_sort = new Dictionary<int, string>();
+        string E ="";// 장착확인 
+        int [] key = new int[20]; // 정렬을 위한 배열
+        Dictionary<int, string> N_sort = new Dictionary<int, string>(); // 정령을 위한 딕셔너리
         int num = 0;
-        List<int> invenkey = player.getInvenKey();
-        int[] invenvalue = player.getInvenValue();
+        List<int> invenkey = player.getInvenKey(); // 인벤토리키
+        int[] invenvalue = player.getInvenValue(); // 인벤토리 밸류
         ItemCode itemCode;
 
         Console.WriteLine("#############################################################");
         Console.WriteLine("############################인벤토리###########################");
         Console.WriteLine($"{"번호",-5}|{"이름",-30}|{"공격력",10}|{"방어력",10}|{"능력",10}|{"수량",5}|{"설명",-60}");
-        foreach(int i in invenkey) // 인벤토리 정렬
+
+        foreach(int i in invenkey) // 인벤토리 정렬을 위한 사전준비
         {
-            key[num] = i;
             itemCode = player.inventory.item.itemMap[i];
             N_sort.Add(i,itemCode.name);
-            num ++;
         }
 
-        var items = from pair in N_sort orderby pair.Value ascending select pair;
-        foreach(KeyValuePair<int, string> pair in items)
+        //Linq를 이용한 딕셔너리 정렬
+        var items = from pair in N_sort orderby pair.Value.Length descending select pair; // 내림차순 정렬
+        //var items = N_sort.OrderByDescending(x => x.Value);
 
-        num =0;
+        //딕셔너리를 활용해서 인벤토리 표시
         foreach(KeyValuePair<int, string> pair in items)
         {
-
+            key[num] = pair.Key;
             itemCode = player.inventory.item.itemMap[pair.Key];
             if(itemCode.get)
             {
                 E+="[E]";
             }
-            Console.WriteLine("{0,-5}|{1,-30}|{2,5}|{3,5}|{4,5}|{5,5}||{6,-60}", num, itemCode.name, itemCode.damage, itemCode.defense, itemCode.health, invenvalue[num], itemCode.info);
+            else
+            {
+                E="";
+            }
+            Console.WriteLine("{0,-5}|{1}{2,-30}|{3,5}|{4,5}|{5,5}|{6,5}||{7,-60}", num, itemCode.name, E, itemCode.damage, itemCode.defense, itemCode.health, invenvalue[num], itemCode.info);
             num ++;
         }
 

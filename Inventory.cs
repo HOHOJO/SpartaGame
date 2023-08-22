@@ -57,14 +57,14 @@ public class Inventory
         int st =0;
         if(weapon||armor)
         {
-            if(item.itemMap[code].damage>=0)
+            if(item.itemMap[code].damage>0)
             {
+                Console.WriteLine("여기옴");
                 st = item.itemMap[weaponCode].damage;
                 item.itemMap[weaponCode].get = false;
                 item.itemMap[code].get = true;
                 weaponCode = code;
                 weapon = true;
-                item.itemMap[code].get = false;
                 return st;
             }
             else
@@ -74,13 +74,12 @@ public class Inventory
                 item.itemMap[code].get = true;
                 armorCode = code;
                 armor = true;
-                item.itemMap[code].get = false;
                 return st;
             } 
         }
         else
         {
-            if(item.itemMap[code].damage>=0)
+            if(item.itemMap[code].damage>0)
             {
                 item.itemMap[code].get = true;
                 weaponCode = code;
