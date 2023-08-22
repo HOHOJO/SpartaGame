@@ -147,6 +147,7 @@ public class Dungeon
         Thread.Sleep(1000);
         Console.WriteLine("던전 클리어!");
         Thread.Sleep(1000);
+        player.EX+=1;
         switch (stagePoint)
         {
             case 5:
@@ -154,6 +155,11 @@ public class Dungeon
             Console.WriteLine("1000G !");
             player.gold+=1000;
             Thread.Sleep(1000);
+            if(player.Levelup()==1)
+            {
+                Console.WriteLine("레벨업 했습니다! {0} => {1}", player.level-1,player.level);
+                Thread.Sleep(1000);
+            }
             inDungeon(player);
             break;
 
@@ -162,6 +168,11 @@ public class Dungeon
             Console.WriteLine("1700G !");
             player.gold+=1700;
             Thread.Sleep(1000);
+            if(player.Levelup()==1)
+            {
+                Console.WriteLine("레벨업 했습니다! {0} => {1}", player.level-1,player.level);
+                Thread.Sleep(1000);
+            }
             inDungeon(player);
             break;
 
@@ -170,6 +181,11 @@ public class Dungeon
             Console.WriteLine("2000G !");
             player.gold+=2000;
             Thread.Sleep(1000);
+            if(player.Levelup()==1)
+            {
+                Console.WriteLine("레벨업 했습니다! {0} => {1}", player.level-1,player.level);
+                Thread.Sleep(1000);
+            }
             inDungeon(player);
             break;
         }

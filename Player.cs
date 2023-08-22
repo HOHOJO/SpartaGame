@@ -13,6 +13,7 @@ public class Player : Character
     public string job{get; set;}
 
     public int level{get; set;}
+    public int EX{get; set;}
     public Inventory inventory;
 
     public Player(string name)
@@ -25,6 +26,7 @@ public class Player : Character
         gold = 1500;
         job = "전사";
         level = 1;
+        EX=0;
     }
 
     public List<int> getInvenKey() // 인벤토리 키전체
@@ -59,6 +61,35 @@ public class Player : Character
         {
             Defense-=st;
             Defense+=inventory.item.itemMap[code].defense;
+        }
+    }
+
+    public int Levelup()
+    {
+        switch(EX)
+        {
+            case 1:
+            level =2;
+            Damage+=1;
+            Defense+=1;
+            return 1;
+            case 3:
+            level =3;
+            Damage+=1;
+            Defense+=1;
+            return 1;
+            case 6:
+            level =4;
+            Damage+=1;
+            Defense+=1;
+            return 1;
+            case 10:
+            level =5;
+            Damage+=1;
+            Defense+=1;
+            return 1;
+            default:
+            return 0;
         }
     }
 
