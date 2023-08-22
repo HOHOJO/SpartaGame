@@ -1,8 +1,8 @@
 namespace SprtaGame
 {
-    public class Item : ItemCode{
+    public class Item : ItemCode{ // 아이템 코드를 상속받는다.
 
-        public Dictionary<int, ItemCode> itemMap = new Dictionary<int, ItemCode>();
+        public Dictionary<int, ItemCode> itemMap = new Dictionary<int, ItemCode>(); // 아이템 목록 키는 int 내용은 itemCode로 딕셔너리 하나로 관리가 가능하다.
         
        public string name="";
        public int damage=0;
@@ -12,7 +12,7 @@ namespace SprtaGame
        public string info="";
        public bool get = false;
 
-        public Item(string name, int damage, int defense, int health, int gold, string info) : base(name, damage, defense, health, gold, info)
+        public Item(string name, int damage, int defense, int health, int gold, string info) : base(name, damage, defense, health, gold, info) // 생성자, 아이템 목록 생성
         {
             Itemset();
         }
@@ -22,7 +22,7 @@ namespace SprtaGame
 
             name = "회복물약";
             info = "평범한 회복물약, 체력을 50 회복시킨다.";
-            itemMap.Add(0, new ItemCode(name, 0, 0, 50, 50,info ));
+            itemMap.Add(0, new ItemCode(name, 0, 0, 50, 50,info )); // 키는 간단하게 코드로, 값은 아이템코드 객체로하여 호출할때 키값으로 편하게 가져온다.
 
             name = "힘물약";
             info = "힘을 10올린다.(던전에서 나오면 초기화)";

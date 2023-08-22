@@ -1,6 +1,6 @@
 namespace SprtaGame
 {
-    public class ItemCode
+    public class ItemCode // 아이템 코드, 아이템 목록을 만들기 위한 하나의 객체
     {
        public string name="";
        public int damage=0;

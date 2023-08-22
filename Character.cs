@@ -1,4 +1,4 @@
-public interface Character
+public interface Character // 캐릭터 인터페이스
 {
     string Name { get; set; }
     int Health { get; set; }

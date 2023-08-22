@@ -3,14 +3,14 @@ using System.Diagnostics.Contracts;
 using System.Text;
 using SprtaGame;
 public class Shop
-{
+{// 상점클래스
     Item item = new Item("",0,0,0,0,"");
     public Dictionary<int, int> poket = new Dictionary<int, int>();
     Player player;
     Town town;
      
     string Command;
-    public Shop()
+    public Shop() // 생성자, 기본 물품을 가진다.
     {
         poket.Add(0,20);
         poket.Add(1,5);
@@ -21,7 +21,7 @@ public class Shop
         poket.Add(6,1);
     }
     
-    public void inShop(Player player)
+    public void inShop(Player player) // 상점의 중심
     {
             this.player=player;
             Console.WriteLine("#############################################################");
@@ -36,18 +36,18 @@ public class Shop
             switch (Command)
                 {
                     case  "1" :
-                        Console.WriteLine("물품을 봅니다.");
+                        Console.WriteLine("물품을 봅니다."); // 아이템 구매로
                         ShowShop();
                         break;
                     case "2" :
-                        shopSell();  
+                        shopSell();  // 아이템 판매
                         break;
 
                     case "3" :
-                        this.myInven();     
+                        this.myInven();// 인벤토리 확인
                         break;
 
-                    case "4" :
+                    case "4" : // 마을로 돌아가기 유저 데이터는 그래도 가져간다
                         town = new Town(player);
                         town.inTown();
                         break;
@@ -55,7 +55,7 @@ public class Shop
 
     }
 
-    public void shopSell()
+    public void shopSell() // 아이템 판매 메서드
     {
                 string E ="";// 장착확인 
         int [] key = new int[20]; // 정렬을 위한 배열
@@ -105,9 +105,9 @@ public class Shop
             Command = Console.ReadLine();
             number = Int32.Parse(Command);
             itemCode = item.itemMap[key[number]];
-            if(player.inventory.poket[key[number]]!=0)
+            if(player.inventory.poket[key[number]]!=0) // 아이템이 있어야 판매가능
             {
-                player.gold+=Convert.ToInt32(itemCode.gold*0.85);
+                player.gold+=Convert.ToInt32(itemCode.gold*0.85); // 아이템은 85퍼 가격에 판매
                 player.inventory.poket[key[number]]-=1;
                 Console.WriteLine("판매완료.");
                 Console.WriteLine("남은수량{0}", player.inventory.poket[key[number]]);
@@ -120,7 +120,7 @@ public class Shop
             }
             break;
 
-            case"b":
+            case"b": // 돌아가기
             inShop(player);
             break;
         }
@@ -133,7 +133,7 @@ public class Shop
         char spad = ' ';
         ItemCode itemCode;
         Console.WriteLine($"{"번호",-5}|{"이름",-30}|{"공격력",5}|{"방어력",5}|{"능력",5}|{"가격",5}|{"수량",5}|{"설명",-60}");
-        foreach( var pair in poket)
+        foreach( var pair in poket) // 아이템 목록 표시들
         {
            itemCode = item.itemMap[pair.Key];
            int padlen = 50 - Encoding.Default.GetBytes(itemCode.name).Length;
@@ -146,16 +146,16 @@ public class Shop
         }
             Console.WriteLine("0 뒤로가기");
 
-            Command = Console.ReadLine();
+            Command = Console.ReadLine();  // 번호 입력시 구매
             int number = Int32.Parse(Command)-1;
             if(number+1 !=0)
             {
                 itemCode = item.itemMap[number];
                 Console.WriteLine(itemCode.name +"" );
-                if(player.gold>=itemCode.gold && poket[number]!=0)
+                if(player.gold>=itemCode.gold && poket[number]!=0) // 돈이 충분하고, 상점 포켓에 있어야한다.
                 {
                     poket[number] -= 1;
-                    player.getItem(number, 1);
+                    player.getItem(number, 1); // 유저에 아이템 획득 메서드 호출
                     Console.WriteLine("구매완료");
                     player.gold-=itemCode.gold;
                     inShop(player);
@@ -171,8 +171,7 @@ public class Shop
                 inShop(player);
             }
     }
-
-    public void myInven()
+public void myInven() // 인벤토리 메서드
     {
         string E ="";// 장착확인 
         int [] key = new int[20]; // 정렬을 위한 배열
@@ -197,11 +196,11 @@ public class Shop
         //var items = N_sort.OrderByDescending(x => x.Value);
 
         //딕셔너리를 활용해서 인벤토리 표시
-        foreach(KeyValuePair<int, string> pair in items)
+        foreach(KeyValuePair<int, string> pair in items) 
         {
             key[num] = pair.Key;
             itemCode = player.inventory.item.itemMap[pair.Key];
-            if(itemCode.get)
+            if(itemCode.get)// 장착한 아이템이면 E 표시가 붙는다.
             {
                 E+="[E]";
             }
@@ -212,7 +211,7 @@ public class Shop
             Console.WriteLine("{0,-5}|{1}{2,-30}|{3,5}|{4,5}|{5,5}|{6,5}||{7,-60}", num, itemCode.name, E, itemCode.damage, itemCode.defense, itemCode.health, invenvalue[num], itemCode.info);
             num ++;
         }
-
+        //인벤토리 기능
         Console.WriteLine("a. 장착관리");
         Console.WriteLine("b. 아이템사용");
         Console.WriteLine("c. 정렬하기");
@@ -220,7 +219,7 @@ public class Shop
         Command = Console.ReadLine();
         switch (Command)
                 {
-                    case "a" :
+                    case "a" : // 무기와 방패를 장착한다.
                     int number;
                     Console.WriteLine("장착 관리하기(장착할 아이템 선택)");
                     Command = Console.ReadLine();
@@ -229,9 +228,9 @@ public class Shop
 
                     Console.WriteLine(""+itemCode.name);
 
-                    if(key[key[number]]<=invenkey.Count&&itemCode.health==0)
+                    if(key[key[number]]<=invenkey.Count&&itemCode.health==0) // 존재하는 아이템이고 장착가능한 아이템이어야 한다.
                     {
-                        player.mountItem(key[number]);
+                        player.mountItem(key[number]); // 플레이어 장착 메서드 소환
                         Console.WriteLine(""+player.inventory.item.itemMap[key[number]].get);
                         Console.WriteLine("장착 완료");
                         myInven();
@@ -244,13 +243,13 @@ public class Shop
                     myInven();
                     break;
 
-                    case "b" :
+                    case "b" : // 아이템 사용
                     Console.WriteLine("사용할 아이템 선택");
                     Command = Console.ReadLine();
                     number = Int32.Parse(Command);
                     itemCode = item.itemMap[key[number]];
 
-                    if(itemCode.health!=0&&player.inventory.poket[key[number]]>0)
+                    if(itemCode.health!=0&&player.inventory.poket[key[number]]>0)// 사용가능한 아이템이고, 수량이 있어야한다.
                     {
                         switch(itemCode.name)
                         {
@@ -278,12 +277,12 @@ public class Shop
                     }
                     break;
 
-                    case "c" :
+                    case "c" : // 다시 정렬
                     items = from pair in N_sort orderby pair.Value.Length descending select pair;
                     myInven();
                     break;
 
-                    case "d" :
+                    case "d" :// 돌아가기
                     inShop(player);
                     break;
                 }

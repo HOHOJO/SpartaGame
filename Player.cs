@@ -1,5 +1,5 @@
 
-public class Player : Character
+public class Player : Character // 플레이어, 캐릭터를 상속받는다.
 {
     public string Name { get; set; }
     public int Health { get; set;}
@@ -16,7 +16,7 @@ public class Player : Character
     public int EX{get; set;}
     public Inventory inventory;
 
-    public Player(string name)
+    public Player(string name) // 플레이어 생성자, 기본 스탯
     {
         inventory = new Inventory();
         Name = name;
@@ -52,7 +52,7 @@ public class Player : Character
     public void mountItem(int code)// 장비 장착
     {
        int st = inventory.mountitem(code);
-        if(inventory.item.itemMap[code].damage>0)
+        if(inventory.item.itemMap[code].damage>0)// 반환 받은 값에 따라 스탯 변경
         {
             Damage-=st;
             Damage+=inventory.item.itemMap[code].damage;
@@ -64,7 +64,7 @@ public class Player : Character
         }
     }
 
-    public int Levelup()
+    public int Levelup() // 던전 클리어 횟수에 따라 레벨업
     {
         switch(EX)
         {
