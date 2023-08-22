@@ -49,7 +49,17 @@ public class Player : Character
 
     public void mountItem(int code)// 장비 장착
     {
-        inventory.mountitem(code);
+       int st = inventory.mountitem(code);
+        if(inventory.item.itemMap[code].damage>0)
+        {
+            Damage-=st;
+            Damage+=inventory.item.itemMap[code].damage;
+        }
+        else
+        {
+            Defense-=st;
+            Defense+=inventory.item.itemMap[code].defense;
+        }
     }
 
     public string getState() // 상태 정보 전달

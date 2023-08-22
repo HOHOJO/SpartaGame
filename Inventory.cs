@@ -52,27 +52,31 @@ public class Inventory
             poket[code]-=1;
     }
 
-    public void mountitem(int code)
+    public int mountitem(int code)
     {   
-        
+        int st =0;
         if(weapon||armor)
         {
             if(item.itemMap[code].damage>=0)
             {
+                st = item.itemMap[weaponCode].damage;
                 item.itemMap[weaponCode].get = false;
                 item.itemMap[code].get = true;
                 weaponCode = code;
                 weapon = true;
+                item.itemMap[code].get = false;
+                return st;
             }
             else
             {
+                st=item.itemMap[code].defense;
                 item.itemMap[armorCode].get = false;
                 item.itemMap[code].get = true;
                 armorCode = code;
                 armor = true;
-            }
-            item.itemMap[code].get = false;
-   
+                item.itemMap[code].get = false;
+                return st;
+            } 
         }
         else
         {
@@ -88,6 +92,7 @@ public class Inventory
                 armorCode = code;
                 armor = true;
             }
+             return st;
         }
 
     }
