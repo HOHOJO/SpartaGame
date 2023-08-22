@@ -13,6 +13,7 @@ public class Dungeon
 
     public void inDungeon(Player player) // 던전입장
     {
+            this.player=player;
             Console.WriteLine("#############################################################");
             Console.WriteLine("#############################던전############################");
             Console.WriteLine("#############################################################");
@@ -52,7 +53,7 @@ public class Dungeon
 
             switch (Command)
                 {
-                    case  "1" :
+                    case "1" :
                         dungeonStage(5);
                         break;
                     case "2" :
@@ -70,9 +71,16 @@ public class Dungeon
     public void dungeonStage(int stagePoint)
     {
         int attack_point = 0;
-        if(stagePoint>=player.Defense)
+        if(stagePoint>player.Defense)
         {
             Console.WriteLine("위험 권장 방어력이 낮습니다. 권장방어력{0}  플레이어방어력{1}", stagePoint, player.Defense);
+            Console.WriteLine("1. 던전입구로");
+            Console.WriteLine("2. 계속");
+            Command = Console.ReadLine();
+            if(Int32.Parse(Command)==1)
+            {
+                inDungeon(player);
+            }
             attack_point = rand.Next(1,10);
             if(attack_point<7)
             {
@@ -97,11 +105,36 @@ public class Dungeon
             int min = 20-cap;
             int max = 35-cap;
             attack_point = rand.Next(min,max);
+            player.Health-=attack_point;
         }
-
+        Thread.Sleep(1000);
+        Console.WriteLine("던전 클리어!");
+        Thread.Sleep(1000);
         switch (stagePoint)
         {
+            case 5:
+            Console.WriteLine("보상획득");
+            Console.WriteLine("1000G !");
+            player.gold+=1000;
+            Thread.Sleep(1000);
+            inDungeon(player);
+            break;
 
+            case 10:
+            Console.WriteLine("보상획득");
+            Console.WriteLine("1700G !");
+            player.gold+=1700;
+            Thread.Sleep(1000);
+            inDungeon(player);
+            break;
+
+            case 15:
+            Console.WriteLine("보상획득");
+            Console.WriteLine("2000G !");
+            player.gold+=2000;
+            Thread.Sleep(1000);
+            inDungeon(player);
+            break;
         }
     }
 
