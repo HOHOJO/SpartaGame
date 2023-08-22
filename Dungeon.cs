@@ -245,7 +245,8 @@ public class Dungeon
                     break;
 
                     case "c" :
-
+                    items = from pair in N_sort orderby pair.Value.Length descending select pair;
+                    myInven();
                     break;
 
                     case "d" :

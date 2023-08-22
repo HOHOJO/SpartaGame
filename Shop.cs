@@ -57,7 +57,74 @@ public class Shop
 
     public void shopSell()
     {
-        
+                string E ="";// 장착확인 
+        int [] key = new int[20]; // 정렬을 위한 배열
+        Dictionary<int, string> N_sort = new Dictionary<int, string>(); // 정령을 위한 딕셔너리
+        int num = 0;
+        List<int> invenkey = player.getInvenKey(); // 인벤토리키
+        int[] invenvalue = player.getInvenValue(); // 인벤토리 밸류
+        ItemCode itemCode;
+
+        Console.WriteLine("#############################################################");
+        Console.WriteLine("############################인벤토리###########################");
+        Console.WriteLine($"{"번호",-5}|{"이름",-30}|{"공격력",10}|{"방어력",10}|{"능력",10}|{"수량",5}|{"설명",-60}");
+
+        foreach(int i in invenkey) // 인벤토리 정렬을 위한 사전준비
+        {
+            itemCode = player.inventory.item.itemMap[i];
+            N_sort.Add(i,itemCode.name);
+        }
+
+        //Linq를 이용한 딕셔너리 정렬
+        var items = from pair in N_sort orderby pair.Value.Length descending select pair; // 내림차순 정렬
+        //var items = N_sort.OrderByDescending(x => x.Value);
+
+        //딕셔너리를 활용해서 인벤토리 표시
+        foreach(KeyValuePair<int, string> pair in items)
+        {
+            key[num] = pair.Key;
+            itemCode = player.inventory.item.itemMap[pair.Key];
+            if(itemCode.get)
+            {
+                E+="[E]";
+            }
+            else
+            {
+                E="";
+            }
+            Console.WriteLine("{0,-5}|{1}{2,-30}|{3,5}|{4,5}|{5,5}|{6,5}||{7,-60}", num, itemCode.name, E, itemCode.damage, itemCode.defense, itemCode.health, invenvalue[num], itemCode.info);
+            num ++;
+        }
+         Console.WriteLine("a. 판매선택");
+        Console.WriteLine("b. 뒤로가기");
+        Command = Console.ReadLine();
+        int number;
+        switch (Command)
+        {
+            case "a":
+            Command = Console.ReadLine();
+            number = Int32.Parse(Command);
+            itemCode = item.itemMap[key[number]];
+            if(player.inventory.poket[key[number]]!=0)
+            {
+                player.gold+=Convert.ToInt32(itemCode.gold*0.85);
+                player.inventory.poket[key[number]]-=1;
+                Console.WriteLine("판매완료.");
+                Console.WriteLine("남은수량{0}", player.inventory.poket[key[number]]);
+                shopSell();
+            }
+            else
+            {
+                Console.WriteLine("수량이 부족합니다.");
+                shopSell();
+            }
+            break;
+
+            case"b":
+            inShop(player);
+            break;
+        }
+
     }
 
     public void ShowShop()
@@ -212,7 +279,8 @@ public class Shop
                     break;
 
                     case "c" :
-
+                    items = from pair in N_sort orderby pair.Value.Length descending select pair;
+                    myInven();
                     break;
 
                     case "d" :
