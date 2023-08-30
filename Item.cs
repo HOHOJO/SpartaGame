@@ -1,18 +1,13 @@
 namespace SprtaGame
 {
-    public class Item : ItemCode{ // 아이템 코드를 상속받는다.
+    public class Item{ 
 
         public Dictionary<int, ItemCode> itemMap = new Dictionary<int, ItemCode>(); // 아이템 목록 키는 int 내용은 itemCode로 딕셔너리 하나로 관리가 가능하다.
         
        public string name="";
-       public int damage=0;
-       public int defense=0;
-       public int health=0;
-       public int gold=0;
        public string info="";
-       public bool get = false;
 
-        public Item(string name, int damage, int defense, int health, int gold, string info) : base(name, damage, defense, health, gold, info) // 생성자, 아이템 목록 생성
+        public Item()// 생성자, 아이템 목록 생성
         {
             Itemset();
         }

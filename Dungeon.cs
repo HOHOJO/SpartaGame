@@ -1,7 +1,7 @@
 using SprtaGame;
 public class Dungeon // 던전 클래스
 {
-    Item item = new Item("",0,0,0,0,"");
+    Item item = new Item();
     Player player;
     Town town;
     string Command;

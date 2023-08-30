@@ -2,7 +2,7 @@ using SprtaGame;
 
 public class Inventory
 {
-    public Item item = new Item("",0,0,0,0,""); // 아이템 목록
+    public Item item = new Item(); // 아이템 목록
     public Dictionary<int, int> poket = new Dictionary<int, int>(); // 인벤토리 목록
 
     bool weapon=false; // 무기장착 상태

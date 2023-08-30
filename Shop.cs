@@ -4,7 +4,7 @@ using System.Text;
 using SprtaGame;
 public class Shop
 {// 상점클래스
-    Item item = new Item("",0,0,0,0,"");
+    Item item = new Item();
     public Dictionary<int, int> poket = new Dictionary<int, int>();
     Player player;
     Town town;

@@ -15,7 +15,7 @@ public class Town
          this.player=player;
          shop= new Shop();
          dungeon = new Dungeon();
-         item = new Item("",0,0,0,0,"");
+         item = new Item();
     }
 
     public void inTown() //마을 입장 메서드
